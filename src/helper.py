@@ -216,7 +216,7 @@ def show_all_products():
                 write_json_from_dict(new_dict=data, rel_file_path='data.json')
                 print("Showing all products")
                 show_products(products=products2, all_item=True)
-                break
+                continue
             except Exception as e:
                 print(e)
         elif choice == 2:
