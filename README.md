@@ -44,7 +44,7 @@ The script's starting point is (main function lives on) src/start.py. You can re
 * `password` - String - SNMP Login password. Also supports gmail app password.
 * `to_mail_address` - String - Where all the mail will be sent
 
-#### start.py interective bot menu:
+#### start.py interactive bot menu:
 -- menus: 
 1 `Authentication Menu` - Where you can record your zalando-prive email and password.
 2 `Product Menu` - All about products. Actions such as adding to cart, removing can be done here.
