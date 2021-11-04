@@ -29,7 +29,7 @@ def get_link_details(link_key_lst):
 def update_cart_info_to_data_json(link_details):
     # print('testing')
     _link = link_details.get('link')
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
 
     products = data.get("products")
@@ -46,7 +46,7 @@ def update_cart_info_to_data_json(link_details):
                 cart['timestamp'] = str(datetime.datetime.now())
                 # print('44')
 
-    with open("data_test.json", "w") as updated_data:
+    with open("data.json", "w") as updated_data:
         json.dump(data, updated_data)
 
 
@@ -62,7 +62,7 @@ def update_auth_cred(email, password):
 
 
 def add_new_product_on_data_json(link, size=''):
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
 
     products = data.get("products")
@@ -104,12 +104,12 @@ def add_new_product_on_data_json(link, size=''):
         }
     )
 
-    with open("data_test.json", "w") as to_update:
+    with open("data.json", "w") as to_update:
         json.dump(data, to_update)
 
 
 def remove_product_from_data_json(link):
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
 
     products = data.get("products")
@@ -120,7 +120,7 @@ def remove_product_from_data_json(link):
                 print('matches!')
                 products.pop(count)
         count += 1
-    with open("data_test.json", "w") as to_update:
+    with open("data.json", "w") as to_update:
         json.dump(data, to_update)
 
 
@@ -167,7 +167,7 @@ def show_products(products, already_added=False, to_be_added=False, all_item=Fal
 
 
 def show_to_be_added_on_cart_product():
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
     products = data.get("products")  # returning list
     show_products(products=products, to_be_added=True)  # function call to show product
@@ -183,7 +183,7 @@ def show_to_be_added_on_cart_product():
                     if count2 == to_remove:
                         products2.pop(to_remove)
                     count2 += 1
-                with open("data_test.json", "w") as to_update:
+                with open("data.json", "w") as to_update:
                     json.dump(data, to_update)
                 show_products(products=products2)
                 break
@@ -194,7 +194,7 @@ def show_to_be_added_on_cart_product():
 
 
 def show_already_added_on_cart_product():
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
     products = data.get("products")  # returning list
     show_products(products=products, already_added=True)  # function call to show product
@@ -202,7 +202,7 @@ def show_already_added_on_cart_product():
 
 
 def show_all_products():
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
     products = data.get("products")  # returning list
     print("Showing all products")
@@ -223,7 +223,7 @@ def show_all_products():
                     if count2 == to_remove:
                         products2.pop(to_remove)
                     count2 += 1
-                with open("data_test.json", "w") as to_update:
+                with open("data.json", "w") as to_update:
                     json.dump(data, to_update)
                 print("Showing all products")
                 show_products(products=products2, all_item=True)
@@ -233,7 +233,7 @@ def show_all_products():
         elif choice == 2:
             products2 = data.get("products")  # returning list
             products2.clear()
-            with open("data_test.json", "w") as to_update:
+            with open("data.json", "w") as to_update:
                 json.dump(data, to_update)
             print('Item list cleared successfully.')
             break
@@ -246,7 +246,7 @@ def show_all_products():
 
 
 def add_new_dummy_product_on_data_json(link, size=''):
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
 
     products = data.get("dummy_products")
@@ -288,12 +288,12 @@ def add_new_dummy_product_on_data_json(link, size=''):
         }
     )
 
-    with open("data_test.json", "w") as to_update:
+    with open("data.json", "w") as to_update:
         json.dump(data, to_update)
 
 
 def remove_dummy_product_from_data_json(link):
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
 
     products = data.get("dummy_products")
@@ -304,12 +304,12 @@ def remove_dummy_product_from_data_json(link):
                 print('matches!')
                 products.pop(count)
         count += 1
-    with open("data_test.json", "w") as to_update:
+    with open("data.json", "w") as to_update:
         json.dump(data, to_update)
 
 
 def show_all_dummy_products():
-    with open('data_test.json') as f:
+    with open('data.json') as f:
         data = json.load(f)
     products = data.get("dummy_products")  # returning list
     print("Showing all dummy products")
@@ -330,7 +330,7 @@ def show_all_dummy_products():
                     if count2 == to_remove:
                         products2.pop(to_remove)
                     count2 += 1
-                with open("data_test.json", "w") as to_update:
+                with open("data.json", "w") as to_update:
                     json.dump(data, to_update)
                 print("Showing all products")
                 show_products(products=products2, all_item=True, dummy=True)
@@ -340,7 +340,7 @@ def show_all_dummy_products():
         elif choice == 2:
             products2 = data.get("dummy_products")  # returning list
             products2.clear()
-            with open("data_test.json", "w") as to_update:
+            with open("data.json", "w") as to_update:
                 json.dump(data, to_update)
             print('Item list cleared successfully.')
             break

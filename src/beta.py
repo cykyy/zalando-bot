@@ -26,7 +26,7 @@ def start_script():
 
         # driver = zbot.get_driver()
         # driver.refresh()
-        with open('data_test.json') as f:
+        with open('data.json') as f:
             data = json.load(f)
         # logics
 
