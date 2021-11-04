@@ -8,6 +8,8 @@ from helper import update_auth_cred, add_new_product_on_data_json, remove_produc
 def start():
     print("***** Welcome to ZBot *****")
     print()
+    truth_table = ['y', 'Y', 'yes', 'YES', 'Yes', 'yEs', 'YeS', 'YES']
+    false_table = ['n', 'N', 'no', 'NO', 'No', 'nO']
     while True:
         print("Choose 1, 2 or 3 from below: ")
         print("1. Authentication Menu")
@@ -61,8 +63,8 @@ def start():
                     # Add product
                     print()
                     product_link_input = str(input("Enter product link(exactly the color you want): "))
-                    size_input_check = str(input("Does the item have any Size option? Yes/No: "))
-                    if size_input_check == 'Yes':
+                    size_input_check = str(input("Does the item have any Size option? Yes/No/Exit: "))
+                    if size_input_check in truth_table:
                         product_size_input = str(input(
                             "Enter product size XPATH(using chrome inspect tool, copy the correct clickable button xpath): "))
                         if 'button' not in product_size_input:
@@ -70,8 +72,18 @@ def start():
                             continue
                         add_new_product_on_data_json(link=product_link_input,
                                                      size=product_size_input)  # adding item on data
-                    else:
+                        print('Successfully added!')
+
+                    elif size_input_check in false_table:
                         add_new_product_on_data_json(link=product_link_input)  # adding item on data
+                        print('Successfully added!')
+
+                    elif size_input_check == 'Exit' or size_input_check == 'exit' or size_input_check == 'ex':
+                        print('Going back...')
+                        continue
+                    else:
+                        print("Choice mismatch! Try again!")
+                        continue
                 elif selected_21 == 2:
                     print()
                     selected_22 = str(input(
@@ -107,8 +119,8 @@ def start():
                     # Add Dummy product
                     print()
                     product_link_input = str(input("Enter product link(exactly the color you want): "))
-                    size_input_check = str(input("Does the item have any Size option? Yes/No: "))
-                    if size_input_check == 'Yes':
+                    size_input_check = str(input("Does the item have any Size option? Yes/No/Exit: "))
+                    if size_input_check in truth_table:
                         product_size_input = str(input(
                             "Enter product size XPATH(using chrome developer mode, copy the correct clickable button xpath): "))
                         if 'button' not in product_size_input:
@@ -116,8 +128,15 @@ def start():
                             continue
                         add_new_dummy_product_on_data_json(link=product_link_input,
                                                            size=product_size_input)  # adding item on data
-                    else:
+                    elif size_input_check in false_table:
                         add_new_dummy_product_on_data_json(link=product_link_input)  # adding item on data
+
+                    elif size_input_check == 'Exit' or size_input_check == 'exit' or size_input_check == 'ex':
+                        print('Going back...')
+                        continue
+                    else:
+                        print("Choice mismatch! Try again!")
+                        continue
 
                 elif selected_31 == 2:
                     print()
