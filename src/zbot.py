@@ -1,3 +1,4 @@
+import datetime
 import json
 import pickle
 import random
@@ -5,7 +6,7 @@ import time
 import undetected_chromedriver.v2 as uc
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-from helper import get_link_details, update_cart_info_to_data_json, write_logs, get_config
+from helper import get_link_details, update_cart_info_to_data_json, write_logs, get_config, do_send_mail
 
 
 def check_element_existence(driver, _By, key):
@@ -112,7 +113,14 @@ class ZBot:
             if dummy:
                 write_logs(f':OK: :zbot.py: func: add_to_cart; msg: dummy shot product({link_details.get("link")}) added to cart; args:[dummyShot=True]')
             else:
-                write_logs(f':OK: :zbot.py: func: add_to_cart; msg: new product({link_details.get("link")}) added to cart;')
+                _msg = f'new product({link_details.get("link")}) added to cart.'
+                if get_config(args='mail').get('enable'):
+                    try:
+                        do_send_mail(to_mail=get_config(args='mail').get('to_mail_address'), sub='New product added to cart', msg=_msg + ' Timestamp:' + str(datetime.datetime.now()))
+                    except Exception as emx:
+                        print('Error sending mail')
+                        write_logs(f':Error: :zbot.py: func: add_to_cart; msg: Error occurred during sending mail; exception: {emx}')
+                write_logs(f':OK: :zbot.py: func: add_to_cart; msg: {_msg} ;')
             # now update to data json that we added on the cart.
             update_cart_info_to_data_json(link_details=link_details)
 

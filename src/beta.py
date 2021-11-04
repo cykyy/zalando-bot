@@ -1,7 +1,8 @@
 import time
 import datetime
 from zbot import ZBot
-from helper import get_link_details, get_time_difference_in_minute, write_logs, read_dict_from_file, get_config
+from helper import get_link_details, get_time_difference_in_minute, write_logs, read_dict_from_file, get_config, \
+    do_send_mail
 
 zbot = ZBot()
 
@@ -9,6 +10,7 @@ zbot = ZBot()
 def start_script():
     write_logs(f':OK: :beta.py: func: start_script; msg: script fired!;')
     last_fired_time = datetime.datetime.now()  # - datetime.timedelta(minutes=20)
+    dummy_shot_count = 0  # keeps tracks of dummy shot.
     while True:
         time.sleep(0.3)
         # zbot.add_cookies()
@@ -41,15 +43,28 @@ def start_script():
             difference = get_time_difference_in_minute(time_now, last_fired_time)
             # print('last dummy fired:', difference, 'minutes ago')
             config_f = get_config(args='setting')
+            if dummy_shot_count >= config_f.get('dummy_shots_max_count'):
+                _msg = 'Please order the product as soon as possible. Cart timer adder aka "Dummy Shot" may not work anymore at this point!'
+                try:
+                    do_send_mail(to_mail=get_config(args='mail').get('to_mail_address'),
+                                 sub='Warning Cart Timer Expiry',
+                                 msg=_msg + ' Timestamp:' + str(datetime.datetime.now()))
+                except Exception as emx:
+                    print('Error sending mail')
+                    write_logs(
+                        f':Error: :zbot.py: func: start_script; msg: Error occurred during sending mail for exceeding dummy shot counter; exception: {emx}')
+                write_logs(
+                    f':Warning: :beta.py: func: start_script; msg: {_msg} ;')
             if float(difference) >= config_f.get("dummy_interval_minutes"):  # interval minutes e.g. 9
                 # fire the dummy cart function and update last fired time
                 print('Firing Dummy Shot')
                 zbot.cart_timer_handler(data.get('dummy_products'))
                 print('end of dummy shot')
                 last_fired_time = datetime.datetime.now()
+                dummy_shot_count += 1
 
         difference = get_time_difference_in_minute(datetime.datetime.now(), last_fired_time)
-        print('last dummy fired:', difference, 'minutes ago')
+        print('last dummy fired:', round(difference, 2), 'minutes ago')
 
         print('**program end**')
         print()

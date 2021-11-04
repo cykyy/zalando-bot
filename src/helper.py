@@ -373,7 +373,7 @@ def write_json_from_dict(new_dict, rel_file_path):
     return True
 
 
-def get_config(args=False):
+def get_config(args=''):
     """
     :param args: takes str (e.g: 'auth').
     :return: returns settings as dict for parameterized args type (e.g: 'auth') from config.json file. if no param supplied returns the whole dict.
@@ -384,3 +384,40 @@ def get_config(args=False):
         return d_conf
     else:
         return conf
+
+
+def do_send_mail(to_mail, sub, msg):
+    """Send mail using SMTP"""
+    try:
+        import smtplib
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        # print('starting')
+        mail_content = msg
+        # The mail addresses and password
+        config_m = get_config('mail')
+        sender_address = config_m.get('from_mail_address')
+        sender_pass = config_m.get('password')
+        # print('sender_address', sender_address)
+        receiver_address = to_mail
+        # Setup the MIME
+        message = MIMEMultipart()
+        message['From'] = sender_address
+        message['To'] = receiver_address
+        message['Subject'] = sub  # The subject line
+        # The body and the attachments for the mail
+        message.attach(MIMEText(mail_content, 'plain'))
+        # Create SMTP session for sending the mail
+        session = smtplib.SMTP('smtp.gmail.com', 587)  # use gmail with port
+        session.starttls()  # enable security
+        session.login(sender_address, sender_pass)  # login with mail_id and password
+        text = message.as_string()
+        session.sendmail(sender_address, receiver_address, text)
+        session.quit()
+        print('Mail Sent')
+        return True
+    except Exception as e:
+        print(e)
+        print('Sending mail failed!')
+        write_logs(f':Error: :helper.py: func: do_send_mail; msg: Failed to send email!; exception: {e}')
+        return False
