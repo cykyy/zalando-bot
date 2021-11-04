@@ -1,7 +1,7 @@
 import time
 import datetime
 from zbot import ZBot
-from helper import get_link_details, get_time_difference_in_minute, write_logs, read_dict_from_file
+from helper import get_link_details, get_time_difference_in_minute, write_logs, read_dict_from_file, get_config
 
 zbot = ZBot()
 
@@ -40,7 +40,8 @@ def start_script():
             time_now = datetime.datetime.now()
             difference = get_time_difference_in_minute(time_now, last_fired_time)
             # print('last dummy fired:', difference, 'minutes ago')
-            if float(difference) >= 0.50:
+            config_f = get_config(args='setting')
+            if float(difference) >= config_f.get("dummy_interval_minutes"):  # interval minutes e.g. 9
                 # fire the dummy cart function and update last fired time
                 print('Firing Dummy Shot')
                 zbot.cart_timer_handler(data.get('dummy_products'))
