@@ -1,0 +1,4 @@
+src/config.json
+
+# Project exclude paths
+/venv/py/
