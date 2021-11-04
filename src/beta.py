@@ -47,13 +47,16 @@ def start_script():
             # dummy starts
             time_now = datetime.datetime.now()
             difference = get_time_difference_in_minute(time_now, last_fired_time)
-            print('last dummy fired:', difference, 'minutes ago')
+            # print('last dummy fired:', difference, 'minutes ago')
             if float(difference) >= 0.50:
                 # fire the dummy cart function and update last fired time
                 print('Firing Dummy Shot')
                 zbot.cart_timer_handler(data.get('dummy_products'))
                 print('end of dummy shot')
                 last_fired_time = datetime.datetime.now()
+
+        difference = get_time_difference_in_minute(datetime.datetime.now(), last_fired_time)
+        print('last dummy fired:', difference, 'minutes ago')
 
         print('**program end**')
         print()
