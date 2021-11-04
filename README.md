@@ -16,15 +16,15 @@ The script's starting point is (main function lives on) src/start.py. You can re
     "password": ""
   },
   "setting": {
-    "user_data_dir": "user-data-dir=/Users/rayhanmia/Library/Application Support/Google/Chrome/Profile 1/",
+    "user_data_dir": "",
     "dummy_interval_minutes": 9,
     "dummy_shots_max_count": 14
   },
   "mail": {
     "enable": true,
-    "from_mail_address": "rayhan17c@gmail.com",
-    "password": "gzjqfozjfygqnvyh",
-    "to_mail_address": "kbir.opr@gmail.com"
+    "from_mail_address": "",
+    "password": "",
+    "to_mail_address": ""
   }
 }
 ```
@@ -61,7 +61,7 @@ Use url format like this when adding a url of a priduct using the interective to
 
 - This script helps to purchase products on zalando-prive site.
 - logs.txt file which contains all the information about the script runtime.
-- Erorr handling such as if a product is not available anymore have been implemented. And many more error handling like this also implemented.
+- Error handling such as if a product is not available anymore have been implemented. And many more error handling like this also implemented.
 
 ## How to start?
 Great, now that we understand who does what and all the required fields, let's jump on to how we can execute the script successfully. Before executing the script make sure you create an account with the zalando-prive site. Now make ready your environment, install all the requirements (pip install -r requirements.txt) and chrome browser on your machine. This script runs perfectly on **python version 3.9.7**
