@@ -29,8 +29,7 @@ def get_link_details(link_key_lst):
 def update_cart_info_to_data_json(link_details):
     # print('testing')
     _link = link_details.get('link')
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
 
     products = data.get("products")
     for product in products:
@@ -46,24 +45,20 @@ def update_cart_info_to_data_json(link_details):
                 cart['timestamp'] = str(datetime.datetime.now())
                 # print('44')
 
-    with open("data.json", "w") as updated_data:
-        json.dump(data, updated_data)
+    write_json_from_dict(new_dict=data, rel_file_path='data.json')
 
 
 def update_auth_cred(email, password):
-    with open('config.json') as f:
-        config = json.load(f)
+    config = read_dict_from_file(file='config.json')
     auth = config.get("auth")
     auth.update({"email": email})
     auth.update({"password": password})
 
-    with open("config.json", "w") as updating_data:
-        json.dump(config, updating_data)
+    write_json_from_dict(new_dict=config, rel_file_path="config.json")
 
 
 def add_new_product_on_data_json(link, size=''):
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file(file='data.json')
 
     products = data.get("products")
     for product in products:  # iterating through list and getting dict
@@ -104,13 +99,11 @@ def add_new_product_on_data_json(link, size=''):
         }
     )
 
-    with open("data.json", "w") as to_update:
-        json.dump(data, to_update)
+    write_json_from_dict(new_dict=data, rel_file_path='data.json')
 
 
 def remove_product_from_data_json(link):
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
 
     products = data.get("products")
     count = 0
@@ -120,8 +113,8 @@ def remove_product_from_data_json(link):
                 print('matches!')
                 products.pop(count)
         count += 1
-    with open("data.json", "w") as to_update:
-        json.dump(data, to_update)
+
+    write_json_from_dict(new_dict=data, rel_file_path='data.json')
 
 
 def show_products(products, already_added=False, to_be_added=False, all_item=False, dummy=False):
@@ -167,8 +160,7 @@ def show_products(products, already_added=False, to_be_added=False, all_item=Fal
 
 
 def show_to_be_added_on_cart_product():
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
     products = data.get("products")  # returning list
     show_products(products=products, to_be_added=True)  # function call to show product
     print()
@@ -183,8 +175,8 @@ def show_to_be_added_on_cart_product():
                     if count2 == to_remove:
                         products2.pop(to_remove)
                     count2 += 1
-                with open("data.json", "w") as to_update:
-                    json.dump(data, to_update)
+
+                write_json_from_dict(new_dict=data, rel_file_path='data.json')
                 show_products(products=products2)
                 break
             except Exception as e:
@@ -194,16 +186,14 @@ def show_to_be_added_on_cart_product():
 
 
 def show_already_added_on_cart_product():
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
     products = data.get("products")  # returning list
     show_products(products=products, already_added=True)  # function call to show product
     print()
 
 
 def show_all_products():
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
     products = data.get("products")  # returning list
     print("Showing all products")
     show_products(products=products, all_item=True)  # function call to show product
@@ -223,8 +213,7 @@ def show_all_products():
                     if count2 == to_remove:
                         products2.pop(to_remove)
                     count2 += 1
-                with open("data.json", "w") as to_update:
-                    json.dump(data, to_update)
+                write_json_from_dict(new_dict=data, rel_file_path='data.json')
                 print("Showing all products")
                 show_products(products=products2, all_item=True)
                 break
@@ -233,8 +222,8 @@ def show_all_products():
         elif choice == 2:
             products2 = data.get("products")  # returning list
             products2.clear()
-            with open("data.json", "w") as to_update:
-                json.dump(data, to_update)
+
+            write_json_from_dict(new_dict=data, rel_file_path='data.json')
             print('Item list cleared successfully.')
             break
         elif choice == 3:
@@ -246,8 +235,7 @@ def show_all_products():
 
 
 def add_new_dummy_product_on_data_json(link, size=''):
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
 
     products = data.get("dummy_products")
     if len(products) > 1:
@@ -288,13 +276,11 @@ def add_new_dummy_product_on_data_json(link, size=''):
         }
     )
 
-    with open("data.json", "w") as to_update:
-        json.dump(data, to_update)
+    write_json_from_dict(new_dict=data, rel_file_path='data.json')
 
 
 def remove_dummy_product_from_data_json(link):
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
 
     products = data.get("dummy_products")
     count = 0
@@ -304,13 +290,11 @@ def remove_dummy_product_from_data_json(link):
                 print('matches!')
                 products.pop(count)
         count += 1
-    with open("data.json", "w") as to_update:
-        json.dump(data, to_update)
+    write_json_from_dict(new_dict=data, rel_file_path='data.json')
 
 
 def show_all_dummy_products():
-    with open('data.json') as f:
-        data = json.load(f)
+    data = read_dict_from_file('data.json')
     products = data.get("dummy_products")  # returning list
     print("Showing all dummy products")
     show_products(products=products, all_item=True, dummy=True)  # function call to show product
@@ -330,8 +314,8 @@ def show_all_dummy_products():
                     if count2 == to_remove:
                         products2.pop(to_remove)
                     count2 += 1
-                with open("data.json", "w") as to_update:
-                    json.dump(data, to_update)
+
+                write_json_from_dict(new_dict=data, rel_file_path='data.json')
                 print("Showing all products")
                 show_products(products=products2, all_item=True, dummy=True)
                 break
@@ -340,8 +324,8 @@ def show_all_dummy_products():
         elif choice == 2:
             products2 = data.get("dummy_products")  # returning list
             products2.clear()
-            with open("data.json", "w") as to_update:
-                json.dump(data, to_update)
+
+            write_json_from_dict(data, 'data.json')
             print('Item list cleared successfully.')
             break
         elif choice == 3:
@@ -379,6 +363,14 @@ def read_dict_from_file(file):
     js = json.loads(data)
     # print(json.dumps(js, indent=3))
     return js
+
+
+def write_json_from_dict(new_dict, rel_file_path):
+    """Reads dict from a json formatted file and returns the dict"""
+    with open(os.path.abspath(os.path.dirname(__file__)) + '/' + rel_file_path, 'w') as updating_json:
+        json.dump(new_dict, updating_json)
+    # print(json.dumps(js, indent=3))
+    return True
 
 
 def get_config(args=False):

@@ -1,16 +1,8 @@
-import json
-import pickle
-import random
 import time
 import datetime
+from zbot import ZBot
+from helper import get_link_details, get_time_difference_in_minute, write_logs, read_dict_from_file
 
-import undetected_chromedriver.v2 as uc
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-from src.zbot import ZBot
-from src.helper import get_link_details, get_time_difference_in_minute, write_logs
-
-# 1635458594
 zbot = ZBot()
 
 
@@ -26,8 +18,8 @@ def start_script():
 
         # driver = zbot.get_driver()
         # driver.refresh()
-        with open('data.json') as f:
-            data = json.load(f)
+
+        data = read_dict_from_file('data.json')
         # logics
 
         for link_key in data.get("products"):  # iterating through all products link

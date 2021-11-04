@@ -5,8 +5,7 @@ import time
 import undetected_chromedriver.v2 as uc
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-
-from src.helper import get_link_details, update_cart_info_to_data_json, write_logs, get_config
+from helper import get_link_details, update_cart_info_to_data_json, write_logs, get_config
 
 
 def check_element_existence(driver, _By, key):
@@ -40,8 +39,6 @@ class ZBot:
         self.driver.get("https://www.zalando-prive.it/")
         self.driver.implicitly_wait(2)  # ok?
         self.logged_in = False
-        '''with open('data.json') as f:
-            self.data = json.load(f)'''
 
     def add_extra_options(self, option):
         """Sets supplied option to the browser"""

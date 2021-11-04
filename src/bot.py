@@ -1,9 +1,8 @@
 import datetime
-import json
-
-from src.helper import update_auth_cred, add_new_product_on_data_json, remove_product_from_data_json, \
+from helper import update_auth_cred, add_new_product_on_data_json, remove_product_from_data_json, \
     show_to_be_added_on_cart_product, show_already_added_on_cart_product, show_all_products, \
-    add_new_dummy_product_on_data_json, remove_dummy_product_from_data_json, show_all_dummy_products, write_logs
+    add_new_dummy_product_on_data_json, remove_dummy_product_from_data_json, show_all_dummy_products, write_logs, \
+    read_dict_from_file
 
 
 def start():
@@ -22,8 +21,8 @@ def start():
 
         if selected == 1:
             # Authentication Menu
-            with open('config.json') as f:
-                config = json.load(f)
+
+            config = read_dict_from_file(file='config.json')
             print("Choose 1 or 2 from below: ")
             print("1. Show details")
             print("2. Update credentials")
@@ -137,7 +136,7 @@ def start():
             pass
 
         elif selected == 5:
-            from src.beta import start_script
+            from beta import start_script
             write_logs(
                 f'Timestamp {datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")} :Script: func: None msg: Starting...',
                 start=True)
