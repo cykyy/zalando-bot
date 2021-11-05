@@ -118,8 +118,8 @@ class ZBot:
                     try:
                         do_send_mail(to_mail=get_config(args='mail').get('to_mail_address'), sub='New product added to cart', msg=_msg + ' Timestamp:' + str(datetime.datetime.now()))
                     except Exception as emx:
-                        print('Error sending mail')
-                        write_logs(f':Error: :zbot.py: func: add_to_cart; msg: Error occurred during sending mail; exception: {emx}')
+                        print(f'Error sending mail.  exception: {emx}')
+                        write_logs(f':Error: :zbot.py: func: add_to_cart; msg: Error occurred during sending mail;')
                 write_logs(f':OK: :zbot.py: func: add_to_cart; msg: {_msg} ;')
             # now update to data json that we added on the cart.
             update_cart_info_to_data_json(link_details=link_details)

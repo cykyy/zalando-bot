@@ -50,9 +50,9 @@ def start_script():
                                  sub='Warning Cart Timer Expiry',
                                  msg=_msg + ' Timestamp:' + str(datetime.datetime.now()))
                 except Exception as emx:
-                    print('Error sending mail')
+                    print('Error sending mail', emx)
                     write_logs(
-                        f':Error: :zbot.py: func: start_script; msg: Error occurred during sending mail for exceeding dummy shot counter; exception: {emx}')
+                        f':Error: :zbot.py: func: start_script; msg: Error occurred during sending mail for exceeding dummy shot counter;')  # exception: {emx}
                 write_logs(
                     f':Warning: :beta.py: func: start_script; msg: {_msg} ;')
             if float(difference) >= config_f.get("dummy_interval_minutes"):  # interval minutes e.g. 9

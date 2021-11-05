@@ -417,7 +417,6 @@ def do_send_mail(to_mail, sub, msg):
         print('Mail Sent')
         return True
     except Exception as e:
-        print(e)
-        print('Sending mail failed!')
-        write_logs(f':Error: :helper.py: func: do_send_mail; msg: Failed to send email!; exception: {e}')
+        print(f'Sending mail failed! exception: {e}')
+        write_logs(f':Error: :helper.py: func: do_send_mail; msg: Failed to send email!;')  # exception: {e}
         return False
