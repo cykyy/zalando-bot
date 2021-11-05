@@ -12,7 +12,9 @@ def start_script():
     last_fired_time = datetime.datetime.now()  # - datetime.timedelta(minutes=20)
     dummy_shot_count = 0  # keeps tracks of dummy shot.
     while True:
-        time.sleep(0.3)
+        config = read_dict_from_file(file='config.json')
+        response_rate = config.get("setting").get("response_rate")
+        # time.sleep(response_rate)
         # zbot.add_cookies()
         print('before login()')
         zbot.login()
@@ -30,10 +32,10 @@ def start_script():
             if not link_details.get('is_added'):
                 print("link_url:", link_key)
                 print('New product found to add to cart. Adding...')
-                time.sleep(0.3)
+                # time.sleep(response_rate/3)
                 # zbot.do_add_to_cart(link_details=link_details)
-                zbot.add_to_cart(link_details=link_details, update_data_json=True)
-                time.sleep(0.3)
+                zbot.add_to_cart(link_details=link_details, update_data_json=True, response_rate=response_rate)
+                time.sleep(response_rate)
             else:
                 # link already added on cart
                 pass
@@ -68,6 +70,6 @@ def start_script():
 
         print('**program end**')
         print()
-        time.sleep(0.2)  # define the intervals ( eg 2 mins or 5mins or any for script to re run )
+        # time.sleep(0.2)  # define the intervals ( eg 2 mins or 5mins or any for script to re run )
         # break
     # time.sleep(50000)

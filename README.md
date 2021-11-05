@@ -18,7 +18,9 @@ The script's starting point is (main function lives on) src/start.py. You can re
   "setting": {
     "user_data_dir": "",
     "dummy_interval_minutes": 9,
-    "dummy_shots_max_count": 14
+    "dummy_shots_max_count": 14,
+    "initial_implicitly_wait": 2,
+    "response_rate": 0.10
   },
   "mail": {
     "enable": true,
@@ -37,6 +39,8 @@ The script's starting point is (main function lives on) src/start.py. You can re
 * `user_data_dir` - String - Chrome profile **user_data_dir** (visit chrome://version from chrome and copy profile path).
 * `dummy_interval_minutes` - Int - Interval minutes between a dummy shot (A dummy shot resets the timer of all existing added to cart products to default 20minutes - Default 9
 * `dummy_interval_minutes` - Int - How many times the dummy shot should get fired without sending any warning message (through email, terminal and log) to purchase the product. - Default 14
+* `initial_implicitly_wait` - Float - Initial load time value. Waits for js,css,html to load on the initial run.
+* `response_rate` - Float - Refresh rate, clicking response rate. Less is fast.
 
 -- mail:
 * `enable` - Bool - Enable mail feature or not. If **true**, sends mail.

@@ -38,7 +38,7 @@ class ZBot:
         self.options.add_argument(user_data_dir)
         self.driver = uc.Chrome(options=self.options)
         self.driver.get("https://www.zalando-prive.it/")
-        self.driver.implicitly_wait(2)  # ok?
+        self.driver.implicitly_wait(get_config(args='setting').get('initial_implicitly_wait'))  # ok?
         self.logged_in = False
 
     def add_extra_options(self, option):
@@ -64,7 +64,7 @@ class ZBot:
         """logins to the site"""
         try:
             self.driver.find_element(By.ID, 'topbar-cta-btn').click()
-            self.driver.implicitly_wait(5)
+            self.driver.implicitly_wait(3)
 
             login_mail = self.driver.find_element(By.XPATH, '//*[@id="form-email"]')
             # login_mail.clear()
@@ -89,17 +89,18 @@ class ZBot:
             if self.do_login():
                 self.logged_in = True
         else:
+            print('aready logged in else')
             self.logged_in = True  # though needs more testing on it. Loosely set
 
-    def do_add_to_cart(self, link_details):
+    def do_add_to_cart(self, link_details, response_rate=0.10):
         try:
             self.driver.get(link_details.get('link'))
-            time.sleep(0.3)
+            time.sleep(response_rate)
             # driver.find_element(By.XPATH, '//*[@id="article-information"]/div[5]/div[2]/div[2]/div[3]/button').click()
             if link_details.get('sizeXPATH'):
-                self.driver.find_element(By.XPATH, link_details.get('sizeXPATH')).click()
-            time.sleep(0.3)
-            self.driver.find_element(By.XPATH, '//*[@id="addToCartButton"]/button').click()
+                self.driver.find_element(By.XPATH, link_details.get('sizeXPATH')).click()  # clicking the size button
+            time.sleep(response_rate/3)
+            self.driver.find_element(By.XPATH, '//*[@id="addToCartButton"]/button').click()  # clicking the add to cart button
             return True
         except Exception as ace:
             print("Error: do_add_to_cart: ", ace)
@@ -107,8 +108,8 @@ class ZBot:
                 f':Error: :zbot.py: func: do_add_to_cart; msg: Error occurred during adding product to cart!;')
             return False
 
-    def add_to_cart(self, link_details, update_data_json=True, dummy=False):
-        resp = self.do_add_to_cart(link_details=link_details)
+    def add_to_cart(self, link_details, update_data_json=True, dummy=False, response_rate=0.20):
+        resp = self.do_add_to_cart(link_details=link_details, response_rate=response_rate)
         if update_data_json and resp:
             if dummy:
                 write_logs(f':OK: :zbot.py: func: add_to_cart; msg: dummy shot product({link_details.get("link")}) added to cart; args:[dummyShot=True]')

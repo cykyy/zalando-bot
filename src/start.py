@@ -15,9 +15,8 @@ def start():
         print("1. Authentication Menu")
         print("2. Product Menu")
         print("3. Dummy Product Menu")
-        print("4. Logs Menu")
-        print("5. Run Script Now!")
-        print("6. Quit")
+        print("4. Run Script Now!")
+        print("5. Quit")
         selected = int(input("Enter:"))
         print()
 
@@ -156,9 +155,7 @@ def start():
                     continue
 
         elif selected == 4:
-            pass
-
-        elif selected == 5:
+            print('Bot loading....')
             from beta import start_script
             write_logs(
                 f'Timestamp {datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")} :Script: func: None msg: Starting...',
@@ -170,7 +167,7 @@ def start():
                 write_logs(
                     f':Error: bot.py; func: start^5; msg: Error Occurred during executing the Zbot script;')
 
-        elif selected == 6:
+        elif selected == 5:
             quit("Thanks for using the bot! Developer https://github.com/cykyy")
 
         else:
