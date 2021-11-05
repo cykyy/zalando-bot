@@ -11,14 +11,15 @@ def start_script():
     write_logs(f':OK: :beta.py: func: start_script; msg: script fired!;')
     last_fired_time = datetime.datetime.now()  # - datetime.timedelta(minutes=20)
     dummy_shot_count = 0  # keeps tracks of dummy shot.
+    print('before login()')
+    zbot.login()
+    print("zbot.logged_in: ", zbot.logged_in)
     while True:
         config = read_dict_from_file(file='config.json')
         response_rate = config.get("setting").get("response_rate")
         # time.sleep(response_rate)
         # zbot.add_cookies()
-        print('before login()')
-        zbot.login()
-        print("zbot.logged_in: ", zbot.logged_in)
+
 
         # driver = zbot.get_driver()
         # driver.refresh()

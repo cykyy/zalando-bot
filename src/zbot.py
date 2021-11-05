@@ -89,7 +89,6 @@ class ZBot:
             if self.do_login():
                 self.logged_in = True
         else:
-            print('aready logged in else')
             self.logged_in = True  # though needs more testing on it. Loosely set
 
     def do_add_to_cart(self, link_details, response_rate=0.10):
@@ -100,7 +99,14 @@ class ZBot:
             if link_details.get('sizeXPATH'):
                 self.driver.find_element(By.XPATH, link_details.get('sizeXPATH')).click()  # clicking the size button
             time.sleep(response_rate/3)
-            self.driver.find_element(By.XPATH, '//*[@id="addToCartButton"]/button').click()  # clicking the add to cart button
+            dax = self.driver.find_element(By.XPATH, '//*[@id="addToCartButton"]/button') # clicking the add to cart button
+            print(dax.text)
+            if dax.text != 'PRENOTATO TEMPORANEAMENTE':
+                dax.click()
+            else:
+                # not on stock
+                print('Product is out of stock')
+                return False
             return True
         except Exception as ace:
             print("Error: do_add_to_cart: ", ace)
