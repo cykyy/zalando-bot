@@ -78,8 +78,8 @@ class ZBot:
             login_mail.send_keys(auth.get('email'))
             login_pass = self.driver.find_element(By.XPATH, '//*[@id="form-password"]')
             login_pass.send_keys(auth.get('password'))
-            login_submit = self.driver.find_element(By.XPATH,
-                                                    '//*[@id="react-root-form"]/div/div/div[2]/div/div[2]/div/div/div/form/button')
+            # login_submit = self.driver.find_element(By.XPATH, '//*[@id="react-root-form"]/div/div/div[2]/div/div[2]/div/div/div/form/button')
+            login_submit = self.driver.find_element(By.ID, 'login-form-submit')
             login_submit.click()
             print('Login succeed!')
             return True
