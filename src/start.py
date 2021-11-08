@@ -165,7 +165,7 @@ def start():
             except Exception as e:
                 print(f'exception - {e}')
                 write_logs(
-                    f':Error: bot.py; func: start^5; msg: Error Occurred during executing the Zbot script;')
+                    f':Error: start.py; func: start^4; msg: Error Occurred during executing the Zbot script;')
 
         elif selected == 5:
             quit("Thanks for using the bot! Developer https://github.com/cykyy")

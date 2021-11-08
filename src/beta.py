@@ -12,8 +12,8 @@ def start_script():
     last_fired_time = datetime.datetime.now()  # - datetime.timedelta(minutes=20)
     dummy_shot_count = 0  # keeps tracks of dummy shot.
     print('before login()')
-    time.sleep(get_config('settings').get('initial_login_response'))
-    zbot.login(response_rate=get_config('settings').get('initial_login_response'))
+    time.sleep(get_config('setting').get('initial_login_response'))
+    zbot.login(response_rate=get_config('setting').get('initial_login_response'))
     print("zbot.logged_in: ", zbot.logged_in)
     while True:
         config = read_dict_from_file(file='config.json')
