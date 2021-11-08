@@ -60,11 +60,16 @@ class ZBot:
     def get_driver(self):
         return self.driver
 
-    def do_login(self):
+    def do_login(self, response_rate=2):
         """logins to the site"""
         try:
             self.driver.find_element(By.ID, 'topbar-cta-btn').click()
-            self.driver.implicitly_wait(3)
+            # self.driver.implicitly_wait(3)
+            time.sleep(response_rate)
+
+            if check_element_existence(self.driver, 'ID', 'sso-login-lounge'):
+                self.driver.find_element(By.ID, 'sso-login-lounge').click()
+                time.sleep(response_rate)
 
             login_mail = self.driver.find_element(By.XPATH, '//*[@id="form-email"]')
             # login_mail.clear()
@@ -84,9 +89,9 @@ class ZBot:
                 f':Error: :zbot.py: func: do_login; msg: Error occurred during login to the site!;')
             return False
 
-    def login(self):
+    def login(self, response_rate=2):
         if check_element_existence(driver=self.driver, _By='ID', key='topbar-cta-btn'):
-            if self.do_login():
+            if self.do_login(response_rate=response_rate):
                 self.logged_in = True
         else:
             self.logged_in = True  # though needs more testing on it. Loosely set
