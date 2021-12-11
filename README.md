@@ -1,4 +1,7 @@
-# Script
+# Zalando-bot
+zalando-prive.it is a different type of eCommerce than the popular ones such as amazon, eBay. Zalando-prive has this feature that allows the products curently on the cart to get expired after 20 minutes of idle. And their possibility of adding to cart for other customers work just like the cart system in a grocery store. For example, say on a shelf there's only 2 packet available for a product "A". Now two customer comes with their cart and takes each, now if any third person comes to buy the same product he/she can't because the product is still in someone else's cart regardless of the product being checked out or not. Now let's say the first two persons walk the store for another half an hour or an hour and maybe later decide he/she will not buy it and puts it away from the cart. What if the store somehow could've put a mechanism to detect how long a product is in a cart and at a certain time an employee comes and asks for checking out otherwise the employee puts away the product! This same mechanism is implemented on the Zalando-prive.it site. This script bypasses their mechanism. This script allows keeping products in the cart even after their cart expiry time which is 20 minutes of not checking out. This script uses selenium and Python 3.9
+
+## Script
 
 The script's starting point is (main function lives on) src/start.py. You can rename the start.py file (only this file). But you cannot change other file names, doing so will throw import error and break the script.
 
