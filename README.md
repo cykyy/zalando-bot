@@ -1,5 +1,53 @@
-# Zalando-bot
-zalando-prive.it is a bit different in terms of cart system than then traditional e-commerce sites. Zalando-prive has this feature that allows the products curently on the cart to get expired after 20 minutes of idle. And their possibility of adding to cart for other customers work just like the cart system in a grocery store. For example, say on a shelf there's only 2 packet available for a product "A". Now two customer comes with their cart and takes each, now if any third person comes to buy the same product he/she can't because the product is still in someone else's cart regardless of the product being checked out or not. Now let's say the first two persons walk the store for another half an hour or an hour and maybe later decide he/she will not buy it and puts it away from the cart. What if the store somehow could've put a mechanism to detect how long a product is in a cart and at a certain time an employee comes and asks for checking out otherwise the employee puts away the product! This same mechanism is implemented on the Zalando-prive.it site. This script bypasses their mechanism. This script allows keeping products in the cart even after their cart expiry time which is 20 minutes of not checking out. This script uses selenium and Python 3.9
+# Zalando Bot 🛒
+
+This Python script is designed to bypass the 20-minute cart expiry timer on `zalando-prive.it`. It helps you keep desired items in your shopping cart indefinitely, so you don't lose them to other customers while you continue browsing.
+
+---
+
+## How It Works
+
+Zalando Privé reserves items in a cart for only 20 minutes. If you don't check out within that time, the items are released and become available to others.
+
+This bot automates the process of "refreshing" your cart's timer. It periodically performs a "dummy shot"—a background action that interacts with your cart. This action resets the 20-minute expiry timer for all items, effectively holding them for you until you're ready to make a purchase.
+
+---
+
+## Features
+
+-   **Cart Timer Bypass**: Keeps items in your cart beyond the standard 20-minute limit.
+-   **Email Notifications**: Sends you a warning email when it's time to purchase your items before the bot stops refreshing.
+-   **Detailed Logging**: Creates a `logs/logs.txt` file with detailed runtime information for easy debugging.
+-   **Interactive CLI**: A simple command-line menu to configure credentials, manage products, and run the script.
+-   **Robust Error Handling**: Manages common issues, such as a product going out of stock.
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed and set up:
+
+-   **Python 3.9+**
+-   **Google Chrome** browser
+-   A **Zalando Privé** account
+
+---
+
+## Setup & Usage
+
+Follow these steps to get the bot up and running.
+
+### 1. Installation
+
+First, clone the repository and install the required Python packages.
+
+```bash
+# Clone the repository (if you haven't already)
+git clone <your-repo-url>
+cd <your-repo-directory>
+
+# Install dependencies
+pip install -r requirements.txt
+```
 
 ## Script
 
